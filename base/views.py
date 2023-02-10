@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
@@ -15,8 +16,15 @@ api = Instamojo(api_key=settings.API_KEY,
 # Create your views here.
 def home(request):
     pizza = Pizza.objects.all()
+    search_in = request.GET.get('search-area')
+    if search_in:
+        pizza = Pizza.objects.filter(pizza_name__icontains=search_in)
+    else:
+        pizza = Pizza.objects.all()
+        search_in = ''
     context = {
-        'pizza': pizza
+        'pizza': pizza,
+        'search_in': search_in
     }
     return render(request, 'index.html', context)
 

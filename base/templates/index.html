@@ -17,6 +17,9 @@
                     <a href="{% url 'add_cart' pizza.id %}" class="btn  btn-outline-primary"> <span class="text">acd to cart</span> <i class="fas fa-shopping-cart"></i>  </a>
 
                 </figcaption>
+                {% empty %}
+                <h1>NO search result...</h1>
+
             </figure> <!-- card // -->
         </div> <!-- col.// -->
         {% endfor %}
