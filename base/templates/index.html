@@ -1,0 +1,32 @@
+{% extends "base.html"%}
+
+{%  block start %}
+<div class="container mt-5 pt-5">
+    {% include "alert.html" %}
+    <div class="row">
+        {% for pizza in pizza %}
+        <div class="col-md-3">
+            <figure class="card card-product-grid">
+                <div class="img-wrap"> <img src="/media/{{pizza.images}}"> </div>
+                <figcaption class="info-wrap border-top">
+                    <a href="#" class="title">
+                        <b>{{pizza.pizza_name}}</b></a>
+                    <small>{{pizza.category.category_name}}</small></a>
+
+                    <div class="price mt-2">₹ {{pizza.price}}.00</div> <!-- price-wrap.// -->
+                    <a href="{% url 'add_cart' pizza.id %}" class="btn  btn-outline-primary"> <span class="text">acd to cart</span> <i class="fas fa-shopping-cart"></i>  </a>
+
+                </figcaption>
+            </figure> <!-- card // -->
+        </div> <!-- col.// -->
+        {% endfor %}
+
+
+        
+       
+    </div>
+
+    </div>
+
+
+{% endblock %}

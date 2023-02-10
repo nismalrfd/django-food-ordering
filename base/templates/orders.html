@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+
+{% block start %}
+
+<div class="container-fluid">
+        {% include "alert.html" %}
+        <div class="row">
+            <aside class="col-lg-9">
+                <div class="card">
+                    <div class="table-responsive">
+                        <table class="table table-borderless table-shopping-cart">
+                            <thead class="text-muted">
+                                <tr class="small text-uppercase">
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
+
+                                    <th scope="col">S.NO</th>
+                                    <th scope="col" width="120">Total</th>
+                                    <th scope="col" width="120">Date</th>
+                                    <th scope="col" width="120"></th>
+                                    <th scope="col" class="text-right d-none d-md-block" width="200"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for order in orders %}
+                                <tr>
+                                    <td>
+
+                                    </td>
+                                    <td>
+
+                                    </td>
+                                    <td>
+                                        <small class="text-muted">{{forloop.counter}}</small>
+
+                                    </td>
+                                    <td>
+                                        <figure class="itemside align-items-center">
+                                            <div class="aside">{{order.get_cart_total}}</div>
+                                            <figcaption class="info"> <a href="#" class="title text-dark" data-abc="true"></a>
+                                            </figcaption>
+                                        </figure>
+                                    </td>
+
+                                    <td>
+                                        <div class="price-wrap">
+                                            <small class="text-muted"> </small>
+                                            <var class="price"> {{order.created_at}}</var>
+                                        </div>
+                                    </td>
+                                    <td>  </td>
+                                    <td>
+                                        <div class="price-wrap">
+                                            <small class="text-muted"> </small>
+                                            <var class="price"></var>
+                                        </div>
+                                    </td>
+                                    <td class="text-right d-none d-md-block"></td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </aside>
+
+                </div>
+            </aside>
+        </div>
+    </div>
+{% endblock %}
