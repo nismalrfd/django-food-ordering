@@ -13,10 +13,11 @@
                                 <tr class="small text-uppercase">
                                     <th scope="col"></th>
                                     <th scope="col"></th>
+                                    <th scope="col"></th>
+
 
                                     <th scope="col">Product</th>
                                     <th scope="col" width="120">Price</th>
-                                    <th scope="col" width="120">Quantity</th>
                                     <th scope="col" width="120">total</th>
                                     <th scope="col" class="text-right d-none d-md-block" width="200"></th>
                                 </tr>
@@ -46,12 +47,6 @@
                                             <var class="price">₹ {{cartitems.pizza.price}}</var>
                                         </div>
                                     </td>
-                                    <td> <select class="form-control">
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                        </select> </td>
                                     <td>
                                         <div class="price-wrap">
                                             <small class="text-muted"> </small>
@@ -64,6 +59,8 @@
 <!--                                           data-abc="true"> <i class="fa fa-heart"></i></a>-->
                                         <a href="{% url 'remove_cart_items' cartitems.id %}" class="btn btn-light" data-abc="true"> Remove</a> </td>
                                     <td></td>
+                                    <td>  </td>
+
                                 </tr>
                             {% empty %}
                             {% endfor %}
@@ -73,15 +70,22 @@
                 </div>
             </aside>
             <aside class="col-lg-3">
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <form>
-                            <div class="form-group"> <label>Have coupon?</label>
-                                <div class="input-group"> <input type="text" class="form-control coupon" name="" placeholder="Coupon code"> <span class="input-group-append"> <button class="btn btn-primary btn-apply coupon">Apply</button> </span> </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+<!--                <div class="card mb-3">-->
+<!--                    <div class="card-body">-->
+<!--                        {% if coupon_code_message %}-->
+<!--                            <div class="alert alert-info">-->
+<!--                                {{coupon_code_message}}-->
+<!--                            </div>-->
+<!--                        {% endif %}-->
+<!--                        <form method="GET" action="">-->
+<!--                            {% include "alert.html" %}-->
+<!--                            {% csrf_token %}-->
+<!--                            <div class="form-group"> <label>Have coupon?</label>-->
+<!--                                <div class="input-group"> <input type="text" class="form-control coupon" name="couponcode" placeholder="Coupon code"> <span class="input-group-append"> <button class="btn btn-primary btn-apply coupon" type="submit">Apply</button> </span> </div>-->
+<!--                            </div>-->
+<!--                        </form>-->
+<!--                    </div>-->
+<!--                </div>-->
                 <div class="card">
                     <div class="card-body">
                         <dl class="dlist-align">

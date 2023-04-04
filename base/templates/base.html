@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<title>Website title - bootstrap html template</title>
+<title>Pizza.in</title>
 
 <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
 
@@ -67,14 +67,14 @@ $(document).ready(function() {
 		<div class="row align-items-center">
 			<div class="col-lg-2 col-4">
 				<div class="brand-wrap">
-					<b>PIZZA.IN</b>
+					<a href="{% url 'home' %}"><b> PIZZA.IN</b></a>
 				</div>
 				<small>shop.com</small><!-- brand-wrap.// -->
 			</div>
 			<div class="col-lg-6 col-sm-12">
 				<form action="#" class="search">
 					<div class="input-group w-100">
-						<input type="text" class="form-control"name="search-area" placeholder="Search">
+						<input type="text" value="{{search_in}}" class="form-control"name="search-area" placeholder="Search">
 						<div class="input-group-append">
 						  <button class="btn btn-primary" type="submit">
 							<i class="fa fa-search"></i>

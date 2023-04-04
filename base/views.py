@@ -1,8 +1,8 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+
 
 from base.models import *
 
@@ -83,8 +83,8 @@ def add_cart(request, id):
     cart, _ = Cart.objects.get_or_create(user=user, is_paid=False)
 
     cart_items = CartItems.objects.create(
-        cart=cart,
-        pizza=pizza_obj
+        cart= cart,
+        pizza= pizza_obj
     )
     return redirect('/')
 
@@ -104,6 +104,20 @@ def cart(request):
         cart.instamojo_id = response['payment_request']['id']
         cart.save()
 
+        # if request.mrthod == 'POST':
+        #     coupon = request.POST.get('coupon')
+        #     coupon_obj = Coupon.objects.filter(coupon_code_icontains=coupon)
+        #     if coupon_obj.exists():
+        #         messages.warning(request, "invalid coupon...")
+        #         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        #     if cart.coupon:
+        #         messages.warning(request, " coupon already exists ...")
+        #         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        #     cart.coupon = coupon_obj[0]
+        #     cart.save()
+        #     messages.warning(request, " coupon applied ...")
+        #     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
         context = {
             'cart': cart,
             'payment_url': response['payment_request']['longurl']
@@ -114,11 +128,14 @@ def cart(request):
         return redirect('/')
 
 
+
+
+
 @login_required(login_url='/login/')
 def remove_cart_items(request, pk):
     try:
         CartItems.objects.get(id=pk).delete()
-        return redirect('/')
+        return redirect('/cart')
     except Exception as e:
         print(e)
 
