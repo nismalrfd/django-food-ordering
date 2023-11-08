@@ -10,23 +10,22 @@
           <div class="card-body">
           <h4 class="card-title mb-4">Sign in</h4>
           <form method="POST">
-              {% csrf_token %}
-              {% include "alert.html" %}
-          <div class="form-group">
-                 <input name="username" class="form-control" placeholder="username" type="text">
-              </div>
-              <div class="form-group">
-                <input name="password" class="form-control" placeholder="Password" type="password" id="password">
-              </div>
-
+            {% csrf_token %}
+            {% include "alert.html" %}
+            <div class="form-group">
+                <input name="username" class="form-control" placeholder="username" type="text" required>
+            </div>
+            <div class="form-group">
+                <input name="password" class="form-control" placeholder="Password" type="password" id="password" required>
+            </div>
               <div class="form-group">
                 <label class="float-left custom-control custom-checkbox"><input type="checkbox" class="custom-control-input"id="showPassword"> <div class="custom-control-label"> show password </div></label>
               </div>
-               <!-- form-group form-check .// -->
-              <div class="form-group">
-                  <button type="submit" class="btn btn-primary btn-block"> Login  </button>
-              </div>
-          </form>
+            <!-- ... rest of the form ... -->
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block" id="loginButton" disabled> Login </button>
+            </div>
+        </form>
           </div>
         </div>
 
@@ -38,7 +37,32 @@
     </section>
 
 
-<script>document.getElementById('showPassword').onclick = function() {
+<script>
+  const usernameInput = document.querySelector('input[name="username"]');
+    const passwordInput = document.querySelector('input[name="password"]');
+    const loginButton = document.getElementById('loginButton');
+
+    usernameInput.addEventListener('input', toggleLoginButton);
+    passwordInput.addEventListener('input', toggleLoginButton);
+
+    function toggleLoginButton() {
+        if (usernameInput.value && passwordInput.value) {
+            loginButton.removeAttribute('disabled');
+        } else {
+            loginButton.setAttribute('disabled', 'disabled');
+        }
+    }
+
+    document.getElementById('showPassword').onclick = function() {
+        if (this.checked) {
+            passwordInput.type = "text";
+        } else {
+            passwordInput.type = "password";
+        }
+    };
+
+
+document.getElementById('showPassword').onclick = function() {
     if ( this.checked ) {
        document.getElementById('password').type = "text";
     } else {
