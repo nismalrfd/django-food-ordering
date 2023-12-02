@@ -13,6 +13,7 @@ urlpatterns = [
     path('logout/', logout_view, name='logout'),
 
 
+
     path('add_cart/<int:id>', add_cart, name='add_cart'),
     path('remove_cart_items/<int:pk>', remove_cart_items, name='remove_cart_items'),
     path('check-check_username_availability/', check_username_availability, name='check_username_availability'),

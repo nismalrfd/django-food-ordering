@@ -23,12 +23,13 @@
 <!--                <div class="form-group">-->
 <!--                    <input  class="form-control" required placeholder="Email" name="email" type="text">-->
 <!--                </div> &lt;!&ndash; form-group// &ndash;&gt;-->
-                <div class="form-group">
-                    <input class="form-control" required placeholder="Password" name="password" type="password">
-                </div> <!-- form-group// -->
-                <div class="form-group">
-                    <input class="form-control" required placeholder="confirm password" name="confirm_password" type="password">
-                </div>
+                    <div class="form-group">
+                        <input class="form-control" required placeholder="Password" name="password" id="passwordInput" type="password">
+                    </div> <!-- form-group// -->
+                    <div class="form-group">
+                        <input class="form-control" required placeholder="Confirm Password" name="confirm_password" id="confirmPasswordInput" type="password">
+                        <div id="passwordValidationMessage"></div>
+                    </div> <!-- form-group// -->
 
 
                 <div class="form-group">
@@ -47,27 +48,41 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-$(document).ready(function() {
-    $('#usernameInput').on('input', function() {
-        const username = $(this).val();
-        if (username.length >= 3) {
-            $.ajax({
-                url: '{% url "check_username_availability" %}',
-                data: {'username': username},
-                method: 'GET',
-                success: function(data) {
-                    if (data.available) {
-                        $('#usernameValidationMessage');
-                    } else {
-                        $('#usernameValidationMessage').text('Username is already taken').css('color', 'red');
+    $(document).ready(function() {
+        $('#usernameInput').on('input', function() {
+            const username = $(this).val();
+            if (username.length >= 3) {
+                $.ajax({
+                    url: '{% url "check_username_availability" %}',
+                    data: {'username': username},
+                    method: 'GET',
+                    success: function(data) {
+                        if (data.available) {
+                            $('#usernameValidationMessage').text('Username is available').css('color', 'green');
+                        } else {
+                            $('#usernameValidationMessage').text('Username is already taken').css('color', 'red');
+                        }
                     }
-                }
-            });
-        } else {
-            $('#usernameValidationMessage').text('').css('color', 'initial');
-        }
+                });
+            } else {
+                $('#usernameValidationMessage').text('').css('color', 'initial');
+            }
+        });
     });
-});
 </script>
+<script>
+    $(document).ready(function() {
+        $('#passwordInput, #confirmPasswordInput').on('keyup', function() {
+            const password = $('#passwordInput').val();
+            const confirmPassword = $('#confirmPasswordInput').val();
+            
+            if (password !== confirmPassword) {
+                $('#passwordValidationMessage').text('Passwords do not match').css('color', 'red');
+            } else {
+                $('#passwordValidationMessage').text('').css('color', 'initial');
+            }
+        });
+    });
+    </script>
 
 {% endblock %}
