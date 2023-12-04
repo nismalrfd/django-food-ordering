@@ -13,7 +13,7 @@
                 {% csrf_token %}
                 {% include "alert.html" %}
                 <div class="form-group">
-                    <input class="form-control" required placeholder="Username" name="username" type="text" id="usernameInput">
+                    <input class="form-control" required placeholder="Username" name="username" type="text" id="username">
                     <div id="usernameValidationMessage"></div>
                 </div>
 <!--                <div class="form-group">-->
@@ -33,7 +33,7 @@
 
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-block"> Register </button>
+                    <button type="submit" id="submitButton" class="btn btn-primary btn-block"> Register </button>
                 </div> <!-- form-group// -->
             </form>
         </div> <!-- card-body.// -->
@@ -49,7 +49,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
-        $('#usernameInput').on('input', function() {
+        $('#username').on('input', function() {
             const username = $(this).val();
             if (username.length >= 3) {
                 $.ajax({
@@ -59,8 +59,14 @@
                     success: function(data) {
                         if (data.available) {
                             $('#usernameValidationMessage').text('Username is available').css('color', 'green');
+                            $('#submitButton').prop('disabled', false);
+
+
                         } else {
                             $('#usernameValidationMessage').text('Username is already taken').css('color', 'red');
+                            $('#submitButton').prop('disabled', true);
+
+
                         }
                     }
                 });
@@ -77,9 +83,11 @@
             const confirmPassword = $('#confirmPasswordInput').val();
             
             if (password !== confirmPassword) {
-                $('#passwordValidationMessage').text('Passwords do not match').css('color', 'red');
+                $('#submitButton').prop('disabled', true);
+
             } else {
-                $('#passwordValidationMessage').text('').css('color', 'initial');
+                $('#submitButton').prop('disabled', false);
+
             }
         });
     });

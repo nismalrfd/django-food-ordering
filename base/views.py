@@ -174,8 +174,8 @@ from django.http import JsonResponse
 from django.contrib.auth.models import User
 
 def check_username_availability(request):
-    if request.method == 'GET' and request.is_ajax():
-        username = request.GET.get('username')
-        user_exists = User.objects.filter(username=username).exists()
-        return JsonResponse({'available': not user_exists})
-    return JsonResponse({'error': 'Invalid request'})
+    username = request.GET.get('username', None)
+    if username is not None:
+        is_available = not User.objects.filter(username=username).exists()
+        return JsonResponse({'available': is_available})
+    return JsonResponse({'available': False})
