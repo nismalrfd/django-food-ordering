@@ -32,7 +32,7 @@ def home(request):
 def login_page(request):
     if request.method == 'POST':
         try:
-            username = request.POST.get('username')
+            username = request.POST.get('username').lower()
             password = request.POST.get('password')
 
             user_obj = User.objects.filter(username=username)
@@ -56,7 +56,7 @@ def login_page(request):
 def register_page(request):
     if request.method == 'POST':
         try:
-            username = request.POST.get('username')
+            username = request.POST.get('username').lower()
             password = request.POST.get('password')
             confirm_password = request.POST.get('confirm_password')
 
